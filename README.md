@@ -1,2 +1,2 @@
-# perso
-This is to store some perso stuffs
+# tools
+This is to store some stuffs
