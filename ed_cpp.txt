@@ -1,0 +1,55 @@
+#include <iostream>
+#include <fstream>
+#include <inttypes.h>
+
+int main(int argc, char ** argv)
+{
+   std::ifstream file1(argv[1], std::ifstream::in | std::ifstream::binary);
+   std::ofstream file2(argv[2], std::ifstream::out);
+   uint8_t n;
+   n = file1.get();
+   while (file1.good() && file2.good())
+   {
+      uint8_t n1 = n/16;
+      uint8_t n2 = n%16;
+      if (n1 < 10) file2 << static_cast<char>('0'+n1);
+      else         file2 << static_cast<char>('a'+n1-10);
+      if (n2 < 10) file2 << static_cast<char>('0'+n2);
+      else         file2 << static_cast<char>('a'+n2-10);
+      n = file1.get();
+   }
+   file1.close();
+   file2.close();
+   return 0;
+}
+
+
+
+
+#include <iostream>
+#include <fstream>
+#include <inttypes.h>
+
+int main(int argc, char ** argv)
+{
+   std::ifstream file1(argv[1], std::ifstream::in);
+   std::ofstream file2(argv[2], std::ifstream::out | std::ifstream::binary);
+   uint8_t n1,n2;
+   n1 = file1.get();
+   n2 = file1.get();
+   while (file1.good() && file2.good())
+   {
+      uint8_t n;
+      if (n1 < 'a') n = 16*(n1-'0');
+      else          n = 16*(n1-'a'+10);
+      if (n2 < 'a') n += (n2-'0');
+      else          n += (n2-'a'+10);
+      file2.put(n);
+      n1 = file1.get();
+      n2 = file1.get();
+   }
+   file1.close();
+   file2.close();
+   return 0;
+}
+
