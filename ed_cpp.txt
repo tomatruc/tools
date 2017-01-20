@@ -27,7 +27,6 @@ int main(int argc, char ** argv)
       n = file1.get();
    }
    if (counter % 64 != 0) file2 << std::endl;
-   file2 << std::endl;
    file1.close();
    file2.close();
    std::cout << "Converted " << counter << " bytes" << std::endl;
